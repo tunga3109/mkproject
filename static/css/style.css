@@ -2572,7 +2572,7 @@ ul {
 /* line 2, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_banner.scss */
 .banner_part {
   position: relative;
-  background-image: url(../img/banner_bg.png);
+  background-image: url(/img/banner_bg.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
