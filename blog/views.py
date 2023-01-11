@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView
 
-from blog.models import Post
+from blog.forms import ContactForm
+from blog.models import Contact, Post
 
 
 class BaseMixin:
@@ -33,4 +35,18 @@ class BlogListView(ListView, BaseMixin):
         context = super().get_context_data()
         context['heading'] = 'BLOG'
         context.update(self.context)
+        return context
+
+
+class ContactTemplateView(BaseMixin, TemplateView):
+    template_name = 'blog/contact.html'
+
+    model = Contact
+    form_class = ContactForm
+    # success_url = reverse_lazy('blog_posts')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context.update(self.context)
+        context['heading'] = 'Contact'
         return context
