@@ -2572,7 +2572,7 @@ ul {
 /* line 2, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_banner.scss */
 .banner_part {
   position: relative;
-  background-image: url('/static/img/pngwing.png');
+  background-image: url('/static/img/pngfind.com-mortal-kombat-x-logo-1500674.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
@@ -6148,7 +6148,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 1, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_breadcrumb.scss */
 .breadcrumb_bg {
-  background-image: url("../img/breadcrumb.png");
+  background-image: url("/static/img/Mortal-Kombat-Wallpaper-HD-Free-download.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
