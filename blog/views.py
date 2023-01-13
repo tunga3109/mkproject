@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.http import HttpRequest
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView
 
@@ -40,13 +40,21 @@ class BlogListView(ListView, BaseMixin):
 
 class ContactTemplateView(BaseMixin, TemplateView):
     template_name = 'blog/contact.html'
-
     model = Contact
     form_class = ContactForm
-    # success_url = reverse_lazy('blog_posts')
+    success_url = reverse_lazy('blog_contact')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         context.update(self.context)
+        context['form'] = ContactForm()
         context['heading'] = 'Contact'
         return context
+
+    def post(self, request: HttpRequest):
+        if request.POST.get('form_type') == 'contact_form':
+            form = ContactForm(request.POST)
+            if form.is_valid():
+                form.save()
+
+        return self.get(request=request)

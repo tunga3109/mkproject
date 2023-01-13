@@ -9,6 +9,9 @@ class ContactForm(ModelForm):
             attrs={
                 'class': 'form-control',
                 'id': 'name',
+                'type': 'text',
+                'onfocus': "this.placeholder = ''",
+                'onblur': "this.placeholder = 'Enter your name'",
                 'placeholder': 'enter your name.....'
             }
         ),
@@ -19,6 +22,8 @@ class ContactForm(ModelForm):
             attrs={
                 'class': 'form-control',
                 'id': 'email',
+                'onfocus': "this.placeholder = ''",
+                'onblur': "this.placeholder = 'Enter your name'",
                 'placeholder': 'Email'
             }
         ),
@@ -30,7 +35,11 @@ class ContactForm(ModelForm):
                 'class': 'form-control w-100',
                 'id': 'message',
                 'name': 'message',
-                'placeholder': 'Enter Message'
+                'placeholder': 'Enter Message',
+                'onfocus': "this.placeholder = ''",
+                'onblur': "this.placeholder = 'Enter Message'",
+                'cols': '30',
+                'rows': '9'
 
             }
         ),

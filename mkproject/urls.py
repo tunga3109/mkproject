@@ -19,8 +19,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from blog.admin import manager
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('manager/', manager.urls),
     path('', include('blog.urls')),
 ]
 
