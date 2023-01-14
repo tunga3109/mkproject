@@ -1,0 +1,90 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}
+Fighters
+{% endblock %}
+
+{% block main %}
+
+{% include "blog/header.html" %}
+
+    <div class="body_bg">
+
+        <!-- breadcrumb start-->
+        <section class="breadcrumb breadcrumb_bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb_iner text-center">
+                            <div class="breadcrumb_iner_item">
+                                <h2>{{ heading }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- breadcrumb start-->
+
+        <!-- gallery_part part start-->
+        <section class="gallery_part section_padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-5">
+                        <div class="section_tittle text-center">
+                            <h2>All Fighters</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+<!--                        <div class="gallery_part_item">-->
+<!--                            <div class="grid">-->
+                                <div class="grid-sizer"></div>
+                                {% for fighter in fighters %}
+                                <a href="{{ fighter.get_absolute_url }}"
+                                    class="grid-item bg_img img-gal grid-item--height-1"
+                                    style="background-image: url('{{ fighter.image.url }}')">
+                                </a>
+
+                                {% endfor %}
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- gallery_part part end-->
+
+                </div>
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        {% if page_obj.has_other_pages %}
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a href="?page=1" class="page-link" aria-label="Previous"><--</a>
+                                </li>
+                                {% endif %}
+                                {% for i in page_obj.paginator.page_range%}
+                                {% if page_obj.number == i %}
+                                <li class="page-item">
+                                    <a href="#" class="page-link">{{ i }}</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">--></a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </nav>
+
+{% include "blog/footer.html" %}
+{% endblock %}

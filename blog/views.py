@@ -1,12 +1,11 @@
 from django.contrib.auth.views import LoginView
-from django.core.paginator import Paginator
 from django.http import HttpRequest
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, TemplateView, ListView
 
 from blog.forms import ContactForm, LoginForm
 from blog.models import Category, Contact, Post
+from fighters.models import Fighter
 
 
 class BaseMixin:
@@ -24,6 +23,8 @@ class MainTemplateView(TemplateView, BaseMixin):
         context['heading'] = 'MORTAL KOMBAT FANPAGE'
         context['subheading'] = 'CHOOSE YOUR DESTINY'
         context['email'] = 'tunga3109@gmail.com'
+        context['posts'] = Post.objects.all()
+        context['fighters'] = Fighter.objects.all()
         context.update(self.context)
         return context
 

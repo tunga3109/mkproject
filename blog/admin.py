@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from .models import Category, Post, Contact
+from fighters.models import Fighter
 
 
 @admin.action(description='опубликовать')
@@ -71,6 +72,12 @@ class ContactAdmin(admin.ModelAdmin):
 
 class ContactManager(ContactAdmin):
     readonly_fields = ('email', 'name', 'message', 'date_created')
+
+
+@admin.register(Fighter)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['character_name']
+    prepopulated_fields = {'slug': ('character_name',)}
 
 
 # admin.site.register(Category, CategoryAdmin)

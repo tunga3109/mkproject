@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}
+{{ fighter.character_name }}
+{% endblock %}
+
+{% block main %}
+
+  {% include "blog/header.html" %}
+
+   <!-- breadcrumb start-->
+   <section class="breadcrumb breadcrumb_bg">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="breadcrumb_iner text-center">
+                  <div class="breadcrumb_iner_item">
+                     <h2>{{ fighter.character_name }}</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- breadcrumb start-->
+
+   <!--================Blog Area =================-->
+   <section class="blog_area single-post-area section_padding">
+      <div class="container">
+         <div class="row">
+            <div class="single-post">
+               <div class="feature-img">
+                  <img class="img-fluid" src="{{ fighter.image.url }}" alt="">
+               </div>
+               <div class="blog_details">
+                  <h2>{{ fighter.descr }}
+                  </h2>
+               </div>
+            </div>
+            {% include "blog/footer.html" %}
+         </div>
+            </section>
+            {% endblock %}
