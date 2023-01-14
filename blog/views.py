@@ -1,9 +1,12 @@
+from django.contrib.auth.views import LoginView
+from django.core.paginator import Paginator
 from django.http import HttpRequest
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView
+from django.views.generic import DetailView, TemplateView, ListView
 
-from blog.forms import ContactForm
-from blog.models import Contact, Post
+from blog.forms import ContactForm, LoginForm
+from blog.models import Category, Contact, Post
 
 
 class BaseMixin:
@@ -20,20 +23,36 @@ class MainTemplateView(TemplateView, BaseMixin):
         context = super().get_context_data()
         context['heading'] = 'MORTAL KOMBAT FANPAGE'
         context['subheading'] = 'CHOOSE YOUR DESTINY'
-        context['phone'] = '+375336377999'
         context['email'] = 'tunga3109@gmail.com'
         context.update(self.context)
+        return context
+
+
+class PostDetailView(BaseMixin, DetailView):
+    template_name = 'blog/single-blog.html'
+    context_object_name = 'post'
+    slug_url_kwarg = 'post_slug'
+    model = Post
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context.update(self.context)
+        context['categories'] = Category.objects.all()
+        context['posts'] = Post.objects.all()
         return context
 
 
 class BlogListView(ListView, BaseMixin):
     template_name = 'blog/blog.html'
     context_object_name = 'posts'
+    paginate_by = 3
     model = Post
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         context['heading'] = 'BLOG'
+        context['email'] = 'tunga3109@gmail.com'
+        context['categories'] = Category.objects.all()
         context.update(self.context)
         return context
 
@@ -49,6 +68,7 @@ class ContactTemplateView(BaseMixin, TemplateView):
         context.update(self.context)
         context['form'] = ContactForm()
         context['heading'] = 'Contact'
+        context['email'] = 'tunga3109@gmail.com'
         return context
 
     def post(self, request: HttpRequest):
@@ -58,3 +78,16 @@ class ContactTemplateView(BaseMixin, TemplateView):
                 form.save()
 
         return self.get(request=request)
+
+
+class SignInView(LoginView, BaseMixin):
+    form_class = LoginForm
+    template_name = 'blog/signin.html'
+    success_url = reverse_lazy('blog_main')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context.update(self.context)
+        context['heading'] = 'Sign In'
+        context['email'] = 'tunga3109@gmail.com'
+        return context

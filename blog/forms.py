@@ -1,4 +1,6 @@
-from django.forms import CharField, EmailField, ModelForm, TextInput, EmailInput, Textarea, Form
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from django.forms import CharField, TextInput, PasswordInput, EmailInput, EmailField, ModelForm, Textarea, Form
 
 from .models import Contact
 
@@ -12,7 +14,7 @@ class ContactForm(ModelForm):
                 'type': 'text',
                 'onfocus': "this.placeholder = ''",
                 'onblur': "this.placeholder = 'Enter your name'",
-                'placeholder': 'enter your name.....'
+                'placeholder': 'Enter your Name'
             }
         ),
         max_length=64
@@ -23,8 +25,8 @@ class ContactForm(ModelForm):
                 'class': 'form-control',
                 'id': 'email',
                 'onfocus': "this.placeholder = ''",
-                'onblur': "this.placeholder = 'Enter your name'",
-                'placeholder': 'Email'
+                'onblur': "this.placeholder = 'Enter your Email'",
+                'placeholder': 'Enter your Email'
             }
         ),
         max_length=254
@@ -61,4 +63,77 @@ class MyForm(Form):
             }
         ),
         max_length=254
+    )
+
+
+class RegisterForm(UserCreationForm):
+    username = CharField(
+        max_length=150,
+        widget=TextInput(
+            attrs={
+                'class': 'input100',
+                'name': 'username',
+                'placeholder': 'Enter Username'
+            }
+        )
+    )
+    email = EmailField(
+        widget=EmailInput(
+            attrs={
+                'class': 'input100',
+                'name': 'email',
+                'placeholder': 'Enter Email'
+            }
+        )
+    )
+    password1 = CharField(
+        min_length=8,
+        widget=PasswordInput(
+            attrs={
+                'class': 'input100',
+                'name': 'password1',
+                'placeholder': 'Enter Password'
+            }
+        )
+    )
+    password2 = CharField(
+        min_length=8,
+        widget=PasswordInput(
+            attrs={
+                'class': 'input100',
+                'name': 'password2',
+                'placeholder': 'Repeat Password'
+            }
+        )
+    )
+
+    class Meta:
+        fields = ('username', 'email', 'password1', 'password2')
+        model = User
+
+
+class LoginForm(AuthenticationForm):
+    username = CharField(
+        max_length=150,
+        widget=TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'email',
+                'onfocus': "this.placeholder = ''",
+                'onblur': "this.placeholder = 'Enter your Username'",
+                'placeholder': 'Enter your Username'
+            }
+        )
+    )
+    password = CharField(
+        min_length=8,
+        widget=PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'email',
+                'onfocus': "this.placeholder = ''",
+                'onblur': "this.placeholder = 'Enter your Password'",
+                'placeholder': 'Enter your Password'
+            }
+        )
     )

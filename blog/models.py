@@ -80,7 +80,7 @@ class Post(models.Model):
         db_table = 'blog_posts'
         verbose_name = 'пост'
         verbose_name_plural = 'посты'
-        ordering = ['date_created']
+        ordering = ['-date_created']
 
 
 class Contact(models.Model):

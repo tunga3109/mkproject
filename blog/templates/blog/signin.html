@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-CONTACT
+Sign In
 {% endblock %}
 
 {% block main %}
@@ -28,10 +28,29 @@ CONTACT
   <!-- ================ contact section start ================= -->
   <section class="contact-section section_padding">
     <div class="container">
-
       <div class="row">
         <div class="col-lg-8">
-        {% include "blog/form_contact.html" %}
+        <form class="form-contact contact_form"  method="post" >
+            {% csrf_token %}
+            <label>
+                 <input name="form_type" value="contact_form" hidden>
+            </label>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  {{ form.username }}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  {{ form.password }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <button type="submit" class="button-contactForm btn_1">Log In</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
