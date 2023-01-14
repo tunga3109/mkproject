@@ -24,7 +24,7 @@ class MainTemplateView(TemplateView, BaseMixin):
         context['subheading'] = 'CHOOSE YOUR DESTINY'
         context['email'] = 'tunga3109@gmail.com'
         context['posts'] = Post.objects.all()
-        context['fighters'] = Fighter.objects.all()
+        context['fighters'] = Fighter.objects.all()[:3]
         context.update(self.context)
         return context
 

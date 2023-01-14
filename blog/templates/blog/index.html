@@ -108,13 +108,8 @@ HOME PAGE
                             <div class="grid">
                                 <div class="grid-sizer"></div>
                                 {% for fighter in fighters %}
-                                <a href="{{ fighter.image.url }}"
-                                    class="grid-item bg_img img-gal grid-item--height-1"
-                                    style="background-image: url('{{ fighter.image.url }}')">
-                                    <div class="single_gallery_item">
-                                        <div class="single_gallery_item_iner">
-                                        </div>
-                                    </div>
+                                <a href="{{ fighter.get_absolute_url }}">
+                                    <img src="{{ fighter.image.url }}" alt="" width="400" height="250">
                                 </a>
                                 {% endfor %}
                             </div>
