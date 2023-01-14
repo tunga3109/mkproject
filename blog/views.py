@@ -45,7 +45,7 @@ class PostDetailView(BaseMixin, DetailView):
 class BlogListView(ListView, BaseMixin):
     template_name = 'blog/blog.html'
     context_object_name = 'posts'
-    paginate_by = 4
+    paginate_by = 3
     model = Post
 
     def get_context_data(self, *, object_list=None, **kwargs):
