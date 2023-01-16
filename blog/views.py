@@ -1,9 +1,9 @@
 from django.contrib.auth.views import LoginView
 from django.http import HttpRequest
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, TemplateView, ListView
+from django.views.generic import CreateView, DetailView, TemplateView, ListView
 
-from blog.forms import ContactForm, LoginForm
+from blog.forms import ContactForm, LoginForm, RegisterForm
 from blog.models import Category, Contact, Post
 from fighters.models import Fighter
 
@@ -92,3 +92,9 @@ class SignInView(LoginView, BaseMixin):
         context['heading'] = 'Sign In'
         context['email'] = 'tunga3109@gmail.com'
         return context
+
+
+class RegisterCreateView(CreateView):
+    form_class = RegisterForm
+    template_name = 'blog/signup.html'
+    success_url = reverse_lazy('signin')

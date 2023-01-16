@@ -71,18 +71,22 @@ class RegisterForm(UserCreationForm):
         max_length=150,
         widget=TextInput(
             attrs={
-                'class': 'input100',
-                'name': 'username',
-                'placeholder': 'Enter Username'
+                'class': 'form-control',
+                'id': 'username',
+                'onfocus': "this.placeholder = ''",
+                'onblur': "this.placeholder = 'Enter your Username'",
+                'placeholder': 'Enter your Username'
             }
         )
     )
     email = EmailField(
         widget=EmailInput(
             attrs={
-                'class': 'input100',
-                'name': 'email',
-                'placeholder': 'Enter Email'
+                'class': 'form-control',
+                'id': 'email',
+                'onfocus': "this.placeholder = ''",
+                'onblur': "this.placeholder = 'Enter your Email'",
+                'placeholder': 'Enter your Email'
             }
         )
     )
@@ -90,9 +94,11 @@ class RegisterForm(UserCreationForm):
         min_length=8,
         widget=PasswordInput(
             attrs={
-                'class': 'input100',
-                'name': 'password1',
-                'placeholder': 'Enter Password'
+                'class': 'form-control',
+                'id': 'password',
+                'onfocus': "this.placeholder = ''",
+                'onblur': "this.placeholder = 'Enter your Password'",
+                'placeholder': 'Enter your Password'
             }
         )
     )
@@ -100,8 +106,10 @@ class RegisterForm(UserCreationForm):
         min_length=8,
         widget=PasswordInput(
             attrs={
-                'class': 'input100',
-                'name': 'password2',
+                'class': 'form-control',
+                'id': 'password2',
+                'onfocus': "this.placeholder = ''",
+                'onblur': "this.placeholder = 'Enter your Password'",
                 'placeholder': 'Repeat Password'
             }
         )
