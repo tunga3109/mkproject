@@ -41,8 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
-    'fighters.apps.FightersConfig'
+    'fighters.apps.FightersConfig',
+    'apiv1.apps.Apiv1Config',
+    'rest_framework',
+    'django_filters'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
