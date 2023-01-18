@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import MainTemplateView, BlogListView, ContactTemplateView, PostDetailView, RegisterCreateView, SignInView
+from .views import MainTemplateView, BlogListView, ContactTemplateView, PostDetailView, RegisterCreateView, SignInView, SearchResultsView
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     path('signup/', RegisterCreateView.as_view(), name='signup'),
     path('signin/', SignInView.as_view(), name='signin'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path("search/", SearchResultsView.as_view(), name="search_results")
 ]

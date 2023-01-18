@@ -6,6 +6,7 @@ from django.views.generic import CreateView, DetailView, TemplateView, ListView
 from blog.forms import ContactForm, LoginForm, RegisterForm
 from blog.models import Category, Contact, Post
 from fighters.models import Fighter
+from django.db.models import Q
 
 
 class BaseMixin:
@@ -98,3 +99,24 @@ class RegisterCreateView(CreateView):
     form_class = RegisterForm
     template_name = 'blog/signup.html'
     success_url = reverse_lazy('signin')
+
+
+class SearchResultsView(ListView, BaseMixin):
+    model = Post
+    template_name = "blog/search_results.html"
+    paginate_by = 3
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context.update(self.context)
+        context['categories'] = Category.objects.all()
+        context['posts'] = Post.objects.all()[:2]
+        return context
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get("title")
+        object_list = Post.objects.filter(
+            Q(title__icontains=query)
+        )
+
+        return object_list
