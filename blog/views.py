@@ -114,9 +114,9 @@ class SearchResultsView(ListView, BaseMixin):
         return context
 
     def get_queryset(self):  # new
-        query = self.request.GET.get("title")
+        query = self.request.GET.get("search")
         object_list = Post.objects.filter(
-            Q(title__icontains=query)
+            Q(title__icontains=query) | Q(descr__icontains=query)
         )
 
         return object_list
