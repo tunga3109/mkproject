@@ -45,7 +45,7 @@ class PostDetailView(BaseMixin, DetailView):
         context['posts'] = Post.objects.all()
 
         comments_connected = Comment.objects.filter(post=self.get_object()).order_by('-created_on')
-        context['comments'] = comments_connected
+        context['comments'] = comments_connected[:4]
         if self.request.user.is_authenticated:
             context['comment_form'] = CommentForm(instance=self.request.user)
         return context
