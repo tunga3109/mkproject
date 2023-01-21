@@ -109,7 +109,18 @@ class Contact(models.Model):
         ordering = ['date_created']
 
 
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='посты')
+    name = models.CharField(max_length=80, default='')
+    email = models.EmailField(default='')
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['created_on']
+        verbose_name = 'комментарий'
+        verbose_name_plural = 'комментарии'
 
-
-
+    def __str__(self):
+        return self.body

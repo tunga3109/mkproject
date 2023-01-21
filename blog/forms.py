@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms import CharField, TextInput, PasswordInput, EmailInput, EmailField, ModelForm, Textarea, Form
 
-from .models import Contact
+from .models import Comment, Contact
 
 
 class ContactForm(ModelForm):
@@ -145,3 +145,48 @@ class LoginForm(AuthenticationForm):
             }
         )
     )
+
+
+class CommentForm(ModelForm):
+    name = CharField(
+        widget=TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'name',
+                'name': 'name',
+                'type': 'text',
+                'placeholder': 'Name'
+            }
+        ),
+        max_length=64
+    )
+    email = EmailField(
+        widget=EmailInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'email',
+                'name': 'email',
+                'type': 'email',
+                'placeholder': 'Email'
+            }
+        ),
+        max_length=254
+    )
+    body = CharField(
+        widget=Textarea(
+            attrs={
+                'class': 'form-control w-100',
+                'id': 'comment',
+                'name': 'comment',
+                'placeholder': 'Write Comment',
+                'cols': '30',
+                'rows': '9'
+
+            }
+        ),
+        max_length=1024
+    )
+
+    class Meta:
+        model = Comment
+        fields = ('body', 'name', 'email')

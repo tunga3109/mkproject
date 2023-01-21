@@ -1,6 +1,7 @@
 from django.contrib import admin
+from django.forms import ModelForm
 
-from .models import Category, Post, Contact
+from .models import Category, Comment, Post, Contact
 from fighters.models import Fighter
 
 
@@ -80,8 +81,20 @@ class ContactAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('character_name',)}
 
 
-# admin.site.register(Category, CategoryAdmin)
-# admin.site.register(Post, PostAdmin)
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'body', 'post', 'created_on', 'active')
+    list_filter = ('active', 'created_on')
+    search_fields = ('post', 'namer', 'body')
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(active=True)
+
+
+
 manager.register(Category, CategoryAdmin)
 manager.register(Post, PostAdmin)
 manager.register(Contact, ContactManager)
+manager.register(Comment, CommentAdmin)
+

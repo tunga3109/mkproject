@@ -1,10 +1,11 @@
 from django.contrib.auth.views import LoginView
 from django.http import HttpRequest
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, TemplateView, ListView
 
-from blog.forms import ContactForm, LoginForm, RegisterForm
-from blog.models import Category, Contact, Post
+from blog.forms import ContactForm, LoginForm, RegisterForm, CommentForm
+from blog.models import Category, Contact, Post, Comment
 from fighters.models import Fighter
 from django.db.models import Q
 
@@ -39,9 +40,21 @@ class PostDetailView(BaseMixin, DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         context.update(self.context)
+        context['comment_form'] = CommentForm()
         context['categories'] = Category.objects.all()
         context['posts'] = Post.objects.all()
+
+        comments_connected = Comment.objects.filter(post=self.get_object()).order_by('-created_on')
+        context['comments'] = comments_connected
+        if self.request.user.is_authenticated:
+            context['comment_form'] = CommentForm(instance=self.request.user)
         return context
+
+    def post(self, request, *args, **kwargs):
+        new_comment = Comment(body=request.POST.get('body'), name=self.request.user, post=self.get_object())
+        new_comment.save()
+
+        return self.get(self, request, *args, **kwargs)
 
 
 class BlogListView(ListView, BaseMixin):
@@ -120,3 +133,5 @@ class SearchResultsView(ListView, BaseMixin):
         )
 
         return object_list
+
+
