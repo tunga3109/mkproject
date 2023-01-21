@@ -92,9 +92,7 @@ class CommentAdmin(admin.ModelAdmin):
         queryset.update(active=True)
 
 
-
 manager.register(Category, CategoryAdmin)
 manager.register(Post, PostAdmin)
 manager.register(Contact, ContactManager)
 manager.register(Comment, CommentAdmin)
-

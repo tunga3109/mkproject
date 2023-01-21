@@ -133,5 +133,3 @@ class SearchResultsView(ListView, BaseMixin):
         )
 
         return object_list
-
-
