@@ -117,7 +117,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         fields = ('username', 'email', 'password1', 'password2')
-        model = Profile
+        model = User
 
 
 class LoginForm(AuthenticationForm):
