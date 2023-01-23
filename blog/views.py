@@ -32,7 +32,7 @@ class MainTemplateView(TemplateView, BaseMixin):
         return context
 
 
-class PostDetailView(BaseMixin, DetailView ):
+class PostDetailView(BaseMixin, DetailView):
     template_name = 'blog/single-blog.html'
     context_object_name = 'post'
     slug_url_kwarg = 'post_slug'
@@ -52,10 +52,8 @@ class PostDetailView(BaseMixin, DetailView ):
         return context
 
     def post(self, request, *args, **kwargs):
-        new_comment = Comment(body=request.POST.get('body'), user=Profile.objects.get(user=request.user), post=self.get_object())
-
+        new_comment = Comment(body=request.POST.get('body'), name=request.user, post=self.get_object())
         new_comment.save()
-
         return self.get(self, request, *args, **kwargs)
 
 

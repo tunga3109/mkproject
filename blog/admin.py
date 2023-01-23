@@ -81,9 +81,9 @@ class FighterAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'body', 'post', 'created_on', 'active')
+    list_display = ('name', 'body', 'post', 'created_on', 'active')
     list_filter = ('active', 'created_on')
-    search_fields = ('post', 'namer', 'body')
+    search_fields = ('post', 'name', 'body')
     actions = ['approve_comments']
 
     def approve_comments(self, request, queryset):
