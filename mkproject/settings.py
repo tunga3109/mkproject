@@ -21,19 +21,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+3&f#!jy1^omf2@8@ewu^id5u_hm-7dqy&xdwa5guos820ifg@'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.getenv('DEBUG', 0))
 
-ALLOWED_HOSTS = ['127.0.0.1', 'a2b7-151-251-120-165.eu.ngrok.io'] #expire in 8 hours(ngrok)
+# ALLOWED_HOSTS = ['127.0.0.1', 'a2b7-151-251-120-165.eu.ngrok.io'] #expire in 8 hours(ngrok)
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS').split()
 
 LOGIN_REDIRECT_URL = 'blog_main' # !!!!!!!!
 LOGOUT_REDIRECT_URL = 'blog_main'
 
 # Application definition
 
-CSRF_TRUSTED_ORIGINS = ['https://a2b7-151-251-120-165.eu.ngrok.io'] #expire in 8 hours(ngrok)
+# CSRF_TRUSTED_ORIGINS = ['https://a2b7-151-251-120-165.eu.ngrok.io'] #expire in 8 hours(ngrok)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
