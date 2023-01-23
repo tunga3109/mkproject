@@ -111,8 +111,7 @@ class Contact(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='посты')
-    name = models.CharField(max_length=20, default='', verbose_name='пользватель')
-    email = models.EmailField(default='')
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)

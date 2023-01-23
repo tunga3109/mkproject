@@ -1,12 +1,6 @@
 from django.views.generic import DetailView, ListView
 from .models import Fighter
-
-
-class BaseMixin:
-    context = {
-        'twitter': 'https://twitter.com',
-        'facebook': 'https://facebook.com',
-    }
+from blog.views import BaseMixin
 
 
 class FighterListView(ListView, BaseMixin):

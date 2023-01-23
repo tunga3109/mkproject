@@ -62,9 +62,9 @@
                   <div class="comment-list">
                      <div class="single-comment justify-content-between d-flex">
                         <div class="user justify-content-between d-flex">
-<!--                           <div class="thumb">-->
-<!--                              <img src="{{ comment.user.avatar.url }}" alt="">-->
-<!--                           </div>-->
+                           <div class="thumb">
+                              <img src="{{ comment.user.avatar.url }}" alt="">
+                           </div>
                            <div class="desc">
                               <p class="comment">
                                  {{ comment.body|linebreaks }}
@@ -72,7 +72,7 @@
                               <div class="d-flex justify-content-between">
                                  <div class="d-flex align-items-center">
                                     <h5>
-                                       <a href="#">{{ comment.name }}</a>
+                                       <a href="#">{{ comment.user.user }}</a>
                                     </h5>
                                     <p class="date">{{ comment.created_on }} </p>
                                  </div>

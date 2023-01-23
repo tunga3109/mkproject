@@ -16,7 +16,7 @@ class BaseMixin:
     }
 
 
-class MainTemplateView(TemplateView, BaseMixin):
+class MainTemplateView(BaseMixin, TemplateView):
     template_name = 'blog/index.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -50,12 +50,13 @@ class PostDetailView(BaseMixin, DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        new_comment = Comment(body=request.POST.get('body'), name=request.user, post=self.get_object())
+        profile = Profile.objects.filter(user=request.user)
+        new_comment = Comment(body=request.POST.get('body'), user=profile[0], post=self.get_object())
         new_comment.save()
         return self.get(self, request, *args, **kwargs)
 
 
-class BlogListView(ListView, BaseMixin):
+class BlogListView(BaseMixin, ListView):
     template_name = 'blog/blog.html'
     context_object_name = 'posts'
     paginate_by = 3
@@ -93,7 +94,7 @@ class ContactTemplateView(BaseMixin, TemplateView):
         return self.get(request=request)
 
 
-class SignInView(LoginView, BaseMixin):
+class SignInView(BaseMixin, LoginView):
     form_class = LoginForm
     template_name = 'blog/signin.html'
     success_url = reverse_lazy('blog_main')
@@ -112,7 +113,7 @@ class RegisterCreateView(CreateView):
     success_url = reverse_lazy('signin')
 
 
-class SearchResultsView(ListView, BaseMixin):
+class SearchResultsView(BaseMixin, ListView):
     model = Post
     template_name = "blog/search_results.html"
     paginate_by = 3
