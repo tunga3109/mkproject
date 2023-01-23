@@ -39,30 +39,31 @@
                      </h2>
                   </div>
                </div>
-               <div class="navigation-top">
-                  <div class="d-sm-flex justify-content-between text-center">
-                     <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and 4
-                        people like this</p>
-                     <div class="col-sm-4 text-center my-2 my-sm-0">
-                        <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
-                     </div>
-                     <ul class="social-icons">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                     </ul>
-                  </div>
-               </div>
+<!--               <div class="navigation-top">-->
+<!--                  <div class="d-sm-flex justify-content-between text-center">-->
+<!--                     <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and 4-->
+<!--                        people like this</p>-->
+<!--                     <div class="col-sm-4 text-center my-2 my-sm-0">-->
+<!--                        &lt;!&ndash; <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> &ndash;&gt;-->
+<!--                     </div>-->
+<!--                     <ul class="social-icons">-->
+<!--                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>-->
+<!--                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>-->
+<!--                        <li><a href="#"><i class="fab fa-dribbble"></i></a></li>-->
+<!--                        <li><a href="#"><i class="fab fa-behance"></i></a></li>-->
+<!--                     </ul>-->
+<!--                  </div>-->
+<!--               </div>-->
 
                <div class="comments-area">
                   <h4>{{ comments.count }} comments</h4>
+                   {% if comments %}
                   {% for comment in comments %}
                   <div class="comment-list">
                      <div class="single-comment justify-content-between d-flex">
                         <div class="user justify-content-between d-flex">
                            <div class="thumb">
-                              <img src="img/comment/comment_1.png" alt="">
+                              <img src="{{ comment.user.avatar.url }}" alt="">
                            </div>
                            <div class="desc">
                               <p class="comment">
@@ -71,19 +72,24 @@
                               <div class="d-flex justify-content-between">
                                  <div class="d-flex align-items-center">
                                     <h5>
-                                       <a href="#">{{ comment.name }}</a>
+                                       <a href="#">{{ comment.user.user }}</a>
                                     </h5>
                                     <p class="date">{{ comment.created_on }} </p>
                                  </div>
-                                 <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                 </div>
+<!--                                 <div class="reply-btn">-->
+<!--                                    <a href="#" class="btn-reply text-uppercase">reply</a>-->
+<!--                                 </div>-->
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
-                  {% endfor %}
+                   {% endfor %}
+                   {% else %}
+                   <p class="comment">
+                     <h5>There are no comments</h5>
+                   </p>
+                   {% endif %}
                </div>
                 <nav class="blog-pagination justify-content-center d-flex">
                         {% if page_obj.has_other_pages %}
@@ -133,7 +139,9 @@
                      </div>
                   </form>
                   {% else %}
-                  <h5>----------------</h5>
+                  <div class="form-group mt-3">
+                       <a href="{% url 'signin' %}" class="btn_1">Please Sign In to leave a comment</a>
+                     </div>
                   {% endif %}
                </div>
             </div>

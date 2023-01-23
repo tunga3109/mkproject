@@ -26,12 +26,14 @@ SECRET_KEY = 'django-insecure-+3&f#!jy1^omf2@8@ewu^id5u_hm-7dqy&xdwa5guos820ifg@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'e86d-151-251-120-165.eu.ngrok.io'] #expire in 8 hours(ngrok)
 
 LOGIN_REDIRECT_URL = 'blog_main' # !!!!!!!!
 LOGOUT_REDIRECT_URL = 'blog_main'
 
 # Application definition
+
+CSRF_TRUSTED_ORIGINS = ['https://e86d-151-251-120-165.eu.ngrok.io'] #expire in 8 hours(ngrok)
 
 INSTALLED_APPS = [
     'django.contrib.admin',

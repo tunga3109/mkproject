@@ -111,7 +111,7 @@ class Contact(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='посты')
-    name = models.CharField(max_length=80, default='')
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='юзер')
     email = models.EmailField(default='')
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -126,4 +126,16 @@ class Comment(models.Model):
         return self.body
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    bio = models.TextField()
+
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        db_table = 'profiles'
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'

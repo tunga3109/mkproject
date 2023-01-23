@@ -3,9 +3,10 @@ from django.http import HttpRequest
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, TemplateView, ListView
+from django.views.generic.list import MultipleObjectMixin
 
 from blog.forms import ContactForm, LoginForm, RegisterForm, CommentForm
-from blog.models import Category, Contact, Post, Comment
+from blog.models import Category, Contact, Post, Comment, Profile
 from fighters.models import Fighter
 from django.db.models import Q
 
@@ -31,7 +32,7 @@ class MainTemplateView(TemplateView, BaseMixin):
         return context
 
 
-class PostDetailView(BaseMixin, DetailView):
+class PostDetailView(BaseMixin, DetailView ):
     template_name = 'blog/single-blog.html'
     context_object_name = 'post'
     slug_url_kwarg = 'post_slug'
@@ -45,13 +46,14 @@ class PostDetailView(BaseMixin, DetailView):
         context['posts'] = Post.objects.all()
 
         comments_connected = Comment.objects.filter(post=self.get_object()).order_by('-created_on')
-        context['comments'] = comments_connected[:4]
+        context['comments'] = comments_connected
         if self.request.user.is_authenticated:
             context['comment_form'] = CommentForm(instance=self.request.user)
         return context
 
     def post(self, request, *args, **kwargs):
-        new_comment = Comment(body=request.POST.get('body'), name=self.request.user, post=self.get_object())
+        new_comment = Comment(body=request.POST.get('body'), user=Profile.objects.get(user=request.user), post=self.get_object())
+
         new_comment.save()
 
         return self.get(self, request, *args, **kwargs)

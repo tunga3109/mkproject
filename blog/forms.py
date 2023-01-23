@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms import CharField, TextInput, PasswordInput, EmailInput, EmailField, ModelForm, Textarea, Form
 
-from .models import Comment, Contact
+from .models import Comment, Contact, Profile
 
 
 class ContactForm(ModelForm):
@@ -117,7 +117,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         fields = ('username', 'email', 'password1', 'password2')
-        model = User
+        model = Profile
 
 
 class LoginForm(AuthenticationForm):
