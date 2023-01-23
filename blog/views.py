@@ -107,10 +107,16 @@ class SignInView(BaseMixin, LoginView):
         return context
 
 
-class RegisterCreateView(CreateView):
+class RegisterCreateView(BaseMixin, CreateView):
     form_class = RegisterForm
     template_name = 'blog/signup.html'
     success_url = reverse_lazy('signin')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context.update(self.context)
+        context['heading'] = 'Sign Up'
+        return context
 
 
 class SearchResultsView(BaseMixin, ListView):
