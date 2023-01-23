@@ -43,9 +43,14 @@ Fighters
 <!--                            <div class="grid">-->
 <!--                                <div class="grid-sizer"></div>-->
                                 {% for fighter in fighters %}
-                                <a href="{{ fighter.get_absolute_url }}">
-                                    <img src="{{ fighter.image.url }}" alt="" width="380" height="250">
-                                </a>
+                                <div class="section_tittle text-center">
+                                    <a href="{{ fighter.get_absolute_url }}">
+                                    <img src="{{ fighter.image.url }}" alt="" width="400" height="450">
+                                    </a>
+                                    <a href="{{ fighter.get_absolute_url }}">
+                                    <h2>{{ fighter.character_name }}</h2>
+                                    </a>
+                                </div>
                                 {% endfor %}
 <!--                            </div>-->
 <!--                        </div>-->
@@ -54,7 +59,6 @@ Fighters
             </div>
         </section>
         <!-- gallery_part part end-->
-
                 </div>
                     <nav class="blog-pagination justify-content-center d-flex">
                         {% if page_obj.has_other_pages %}

@@ -1,9 +1,7 @@
 from django.contrib.auth.views import LoginView
 from django.http import HttpRequest
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, TemplateView, ListView
-from django.views.generic.list import MultipleObjectMixin
 
 from blog.forms import ContactForm, LoginForm, RegisterForm, CommentForm
 from blog.models import Category, Contact, Post, Comment, Profile

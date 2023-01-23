@@ -79,8 +79,9 @@ HOME PAGE
                     <div class="col-md-7 offset-sm-1">
                         <div class="live_stareams_slide owl-carousel">
                             <!---for--->
+                            {% for fighter in fighters %}
                             <div class="live_stareams_slide_img">
-                                <img src="{% static 'img/Mortal-Kombat-Wallpaper-Free-Download.jpg' %}" alt="">
+                                <img src="{{ fighter.image.url }}" alt="" width="300" height="250">
                                 <div class="extends_video">
                                     <a id="play-video_1" class="video-play-button popup-youtube"
                                         href="https://www.youtube.com/watch?v=GtL1huin9EE">
@@ -89,6 +90,7 @@ HOME PAGE
                                 </div>
                             </div>
                             <!---endfor--->
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -102,7 +104,7 @@ HOME PAGE
                 <div class="row justify-content-center">
                     <div class="col-xl-5">
                         <div class="section_tittle text-center">
-                            <h2><a href="{% url 'fighter_main' %}">All Fighter</a></h2>
+                            <h2><a href="{% url 'fighter_main' %}">All Fighters</a></h2>
                         </div>
                     </div>
                 </div>
@@ -113,7 +115,7 @@ HOME PAGE
                                 <div class="grid-sizer"></div>
                                 {% for fighter in fighters %}
                                 <a href="{{ fighter.get_absolute_url }}">
-                                    <img src="{{ fighter.image.url }}" alt="" width="400" height="250">
+                                    <img src="{{ fighter.image.url }}" alt="" width="300" height="250">
                                 </a>
                                 {% endfor %}
                             </div>

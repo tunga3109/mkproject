@@ -34,13 +34,13 @@ BLOGS
                         {% for post in posts %}
                         <article class="blog_item">
                             <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{{ post.image.url }}" alt="" width="100">
+                                <img class="card-img rounded-0" src="{{ post.image.url }}" alt="" width="200" height="650">
                                 <a href="{{ post.get_absolute_url }}" class="blog_item_date">
                                     <h3>{{ post.date }}</h3>
                                 </a>
                             </div>
                             <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
+                                <a class="d-inline-block" href="{{ post.get_absolute_url }}">
                                     <h2>{{ post.title }}</h2>
                                 </a>
                                 <p>{{ post.descr|truncatechars:50 }}</p>
@@ -119,7 +119,7 @@ BLOGS
                             <div class="media post_item">
                                 <img src="{{ post.image.url }}" alt="post" width="200">
                                 <div class="media-body">
-                                    <a href="single-blog.html">
+                                    <a href="{{ post.get_absolute_url }}">
                                         <h3>{{ post.title }}</h3>
                                     </a>
                                     <p>{{ post.date }}</p>
