@@ -46,10 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+    'registration.apps.RegistrationConfig',
     'fighters.apps.FightersConfig',
     'apiv1.apps.Apiv1Config',
     'rest_framework',
-    'django_filters'
+    'django_filters',
+    'rest_framework.authtoken'
 ]
 
 REST_FRAMEWORK = {

@@ -1,9 +1,8 @@
-from django.contrib.auth.views import LoginView
 from django.http import HttpRequest
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, TemplateView, ListView
+from django.views.generic import DetailView, TemplateView, ListView
 
-from blog.forms import ContactForm, LoginForm, RegisterForm, CommentForm
+from blog.forms import ContactForm, CommentForm
 from blog.models import Category, Contact, Post, Comment, Profile
 from fighters.models import Fighter
 from django.db.models import Q
@@ -92,31 +91,6 @@ class ContactTemplateView(BaseMixin, TemplateView):
                 form.save()
 
         return self.get(request=request)
-
-
-class SignInView(BaseMixin, LoginView):
-    form_class = LoginForm
-    template_name = 'blog/signin.html'
-    success_url = reverse_lazy('blog_main')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        context.update(self.context)
-        context['heading'] = 'Sign In'
-        context['email'] = 'tunga3109@gmail.com'
-        return context
-
-
-class RegisterCreateView(BaseMixin, CreateView):
-    form_class = RegisterForm
-    template_name = 'blog/signup.html'
-    success_url = reverse_lazy('signin')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        context.update(self.context)
-        context['heading'] = 'Sign Up'
-        return context
 
 
 class SearchResultsView(BaseMixin, ListView):
