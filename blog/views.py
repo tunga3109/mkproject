@@ -112,3 +112,16 @@ class SearchResultsView(BaseMixin, ListView):
         )
 
         return object_list
+
+
+class CategoryListView(BaseMixin, ListView):
+    template_name = 'blog/category_list.html'
+    context_object_name = 'categories'
+    paginate_by = 3
+    model = Category
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['heading'] = 'Categories'
+        context.update(self.context)
+        return context

@@ -102,7 +102,9 @@ BLOGS
                         </aside>
 
                                 <aside class="single_sidebar_widget post_category_widget">
+                                    <a href="{% url 'category_list' %}" class="d-flex">
                             <h4 class="widget_title">Category</h4>
+                                    </a>
                             <ul class="list cat-list">
                                 {% for category in categories %}
                                 <li>

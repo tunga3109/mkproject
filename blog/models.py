@@ -25,6 +25,9 @@ class Category(models.Model):
         verbose_name_plural = 'категории'
         db_table = 'blog_categories'
 
+    def get_category_name(self):
+        return reverse('', kwargs={'category_name': self.slug})
+
 
 class Post(models.Model):
     title = models.CharField(

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-BLOGS
+Categories
 {% endblock %}
 
 {% block main %}
@@ -30,27 +30,12 @@ BLOGS
             <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
-                        <!-- blog -->
-                        {% for post in posts %}
+                        {% for category in categories %}
                         <article class="blog_item">
                             <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{{ post.image.url }}" alt="" width="200" height="650">
-                                <a href="{{ post.get_absolute_url }}" class="blog_item_date">
-                                    <h3>{{ post.date }}</h3>
-                                </a>
-                            </div>
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="{{ post.get_absolute_url }}">
-                                    <h2>{{ post.title }}</h2>
-                                </a>
-                                <p>{{ post.descr|truncatechars:50 }}</p>
-                                <ul class="blog-info-link">
-<!--                                    <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>-->
-<!--                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>-->
-                                </ul>
+                                    <h3>{{ category.name }}</h3>
                             </div>
                         </article>
-                         <!-- blog -->
                         {% endfor %}
                     </div>
                     <nav class="blog-pagination justify-content-center d-flex">
@@ -102,9 +87,7 @@ BLOGS
                         </aside>
 
                                 <aside class="single_sidebar_widget post_category_widget">
-                                    <a href="{% url 'category_list' %}" class="d-flex">
                             <h4 class="widget_title">Category</h4>
-                                    </a>
                             <ul class="list cat-list">
                                 {% for category in categories %}
                                 <li>
