@@ -15,7 +15,6 @@ class SignInView(BaseMixin, LoginView):
         context = super().get_context_data()
         context.update(self.context)
         context['heading'] = 'Sign In'
-        context['email'] = 'tunga3109@gmail.com'
         return context
 
 

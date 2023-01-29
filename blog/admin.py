@@ -66,7 +66,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ['email', 'name']
+    list_display = ['email', 'name', 'message']
 
 
 class ContactManager(ContactAdmin):
