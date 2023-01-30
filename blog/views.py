@@ -1,4 +1,5 @@
 from django.http import HttpRequest
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, TemplateView, ListView
 
@@ -128,19 +129,23 @@ class CategoryListView(BaseMixin, ListView):
         return context
 
 
-class BlogFilterCategoryListView(BaseMixin, ListView):
-    template_name = 'blog/posts_filter_category.html'
-    paginate_by = 3
-    context_object_name = 'categories'
-    slug_url_kwarg = 'post_slug'
-    model = Category
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        context['posts'] = Post.objects.all()
-        context['categories'] = Category.objects.all()
-        context['recent_posts'] = Post.objects.order_by('-date_created')[:3]
-        context.update(self.context)
-        return context
+# class BlogFilterCategoryListView(BaseMixin, ListView):
+#     template_name = 'blog/posts_filter_category.html'
+#     paginate_by = 3
+#     context_object_name = 'posts'
+#     model = Post
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data()
+#         context['categories'] = Category.objects.all()
+#         context['recent_posts'] = Post.objects.order_by('-date_created')[:3]
+#         context.update(self.context)
+#         return context
 
 
+def post_category(request, slug):
+    posts = Post.objects.filter(category__slug=slug)
+    categories = Category.objects.all()
+    recent_posts = Post.objects.order_by('-date_created')[:3]
+
+    return render(request, 'blog/posts_filter_category.html', {'posts': posts, 'categories': categories, 'recent_posts': recent_posts})

@@ -163,19 +163,19 @@
                      </form>
                   </aside>
                   <aside class="single_sidebar_widget post_category_widget">
-                      <a href="{% url 'category_list' %}" class="d-flex">
-                     <h4 class="widget_title">Category</h4>
-                      </a>
-                     <ul class="list cat-list">
-                        {% for category in categories %}
+                                    <a href="{% url 'category_list' %}" class="d-flex">
+                            <h4 class="widget_title">Category</h4>
+                                    </a>
+                            <ul class="list cat-list">
+                                {% for category in categories %}
                                 <li>
-                                    <a href="#" class="d-flex">
+                                    <a href="category/{{ category.slug }}" class="d-flex" name="category_name">
                                         <p>{{ category.name }}</p>
                                     </a>
                                 </li>
                                 {% endfor %}
-                     </ul>
-                  </aside>
+                            </ul>
+                                </aside>
                   <aside class="single_sidebar_widget popular_post_widget">
                      <h3 class="widget_title">Recent Post</h3>
                         {% for post in recent_posts %}

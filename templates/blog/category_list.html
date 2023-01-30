@@ -33,7 +33,9 @@ Categories
                         {% for category in categories %}
                         <article class="blog_item">
                             <div class="blog_item_img">
+                                <a href="{{ category.slug }}" class="d-flex">
                                     <h3>{{ category.name }}</h3>
+                                </a>
                             </div>
                         </article>
                         {% endfor %}
@@ -91,7 +93,7 @@ Categories
                             <ul class="list cat-list">
                                 {% for category in categories %}
                                 <li>
-                                    <a href="#" class="d-flex">
+                                    <a href="{{ category.slug }}" class="d-flex">
                                         <p>{{ category.name }}</p>
                                     </a>
                                 </li>

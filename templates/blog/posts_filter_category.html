@@ -108,7 +108,7 @@ BLOGS
                             <ul class="list cat-list">
                                 {% for category in categories %}
                                 <li>
-                                    <a href="{{ category.get_absolute_url }}" class="d-flex">
+                                    <a href="{{ category.slug }}" class="d-flex" name="category_name">
                                         <p>{{ category.name }}</p>
                                     </a>
                                 </li>
