@@ -20,6 +20,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_category_slug(self):
+        return reverse('category_list_filter', kwargs={'category_slug': self.slug})
+
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
@@ -67,9 +70,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog_post', kwargs={'post_slug': self.slug})
-
-    def get_category_slug(self):
-        return reverse('category_list_filter', kwargs={'category_slug': self.category.slug})
 
     @property
     def date(self) -> str:

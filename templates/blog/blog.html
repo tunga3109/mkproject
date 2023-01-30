@@ -106,10 +106,10 @@ BLOGS
                             <h4 class="widget_title">Category</h4>
                                     </a>
                             <ul class="list cat-list">
-                                {% for category in posts %}
+                                {% for category in categories %}
                                 <li>
                                     <a href="{{ category.get_category_slug }}" class="d-flex" name="category_name">
-                                        <p>{{ category.category.name }}</p>
+                                        <p>{{ category.name }}</p>
                                     </a>
                                 </li>
                                 {% endfor %}

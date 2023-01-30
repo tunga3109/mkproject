@@ -131,11 +131,13 @@ class CategoryListView(BaseMixin, ListView):
 class BlogFilterCategoryListView(BaseMixin, ListView):
     template_name = 'blog/posts_filter_category.html'
     paginate_by = 3
-    context_object_name = 'posts'
-    model = Post
+    context_object_name = 'categories'
+    slug_url_kwarg = 'post_slug'
+    model = Category
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
+        context['posts'] = Post.objects.all()
         context['categories'] = Category.objects.all()
         context['recent_posts'] = Post.objects.order_by('-date_created')[:3]
         context.update(self.context)
