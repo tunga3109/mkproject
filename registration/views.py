@@ -30,3 +30,5 @@ class RegisterCreateView(BaseMixin, CreateView):
         context['form'] = RegisterForm()
         context['heading'] = 'Sign Up'
         return context
+
+

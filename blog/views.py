@@ -40,7 +40,7 @@ class PostDetailView(BaseMixin, DetailView):
         context.update(self.context)
         context['comment_form'] = CommentForm()
         context['categories'] = Category.objects.all()
-        context['posts'] = Post.objects.all()
+        context['recent_posts'] = Post.objects.order_by('-date_created')[:3]
 
         comments_connected = Comment.objects.filter(post=self.get_object()).order_by('-created_on')
         context['comments'] = comments_connected
@@ -66,6 +66,7 @@ class BlogListView(BaseMixin, ListView):
         context['heading'] = 'BLOG'
         context['email'] = 'tunga3109@gmail.com'
         context['categories'] = Category.objects.all()
+        context['recent_posts'] = Post.objects.order_by('-date_created')[:3]
         context.update(self.context)
         return context
 
@@ -102,7 +103,7 @@ class SearchResultsView(BaseMixin, ListView):
         context = super().get_context_data()
         context.update(self.context)
         context['categories'] = Category.objects.all()
-        context['posts'] = Post.objects.all()[:2]
+        context['recent_posts'] = Post.objects.order_by('-date_created')[:3]
         return context
 
     def get_queryset(self):  # new
@@ -125,3 +126,19 @@ class CategoryListView(BaseMixin, ListView):
         context['heading'] = 'Categories'
         context.update(self.context)
         return context
+
+
+class BlogFilterCategoryListView(BaseMixin, ListView):
+    template_name = 'blog/posts_filter_category.html'
+    paginate_by = 3
+    context_object_name = 'posts'
+    model = Post
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['categories'] = Category.objects.all()
+        context['recent_posts'] = Post.objects.order_by('-date_created')[:3]
+        context.update(self.context)
+        return context
+
+

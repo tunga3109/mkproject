@@ -31,10 +31,10 @@ BLOGS
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
                         <!-- blog -->
-                        {% for post in object_list %}
+                        {% for post in posts %}
                         <article class="blog_item">
                             <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{{ post.image.url }}" alt="" width="100">
+                                <img class="card-img rounded-0" src="{{ post.image.url }}" alt="" width="200" height="650">
                                 <a href="{{ post.get_absolute_url }}" class="blog_item_date">
                                     <h3>{{ post.date }}</h3>
                                 </a>
@@ -108,7 +108,7 @@ BLOGS
                             <ul class="list cat-list">
                                 {% for category in categories %}
                                 <li>
-                                    <a href="#" class="d-flex">
+                                    <a href="{{ category.get_absolute_url }}" class="d-flex">
                                         <p>{{ category.name }}</p>
                                     </a>
                                 </li>

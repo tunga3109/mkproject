@@ -25,9 +25,6 @@ class Category(models.Model):
         verbose_name_plural = 'категории'
         db_table = 'blog_categories'
 
-    def get_category_name(self):
-        return reverse('', kwargs={'category_name': self.slug})
-
 
 class Post(models.Model):
     title = models.CharField(
@@ -70,6 +67,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog_post', kwargs={'post_slug': self.slug})
+
+    def get_category_slug(self):
+        return reverse('category_list_filter', kwargs={'category_slug': self.category.slug})
 
     @property
     def date(self) -> str:
