@@ -112,7 +112,6 @@ class SearchResultsView(BaseMixin, ListView):
         object_list = Post.objects.filter(
             Q(title__icontains=query) | Q(descr__icontains=query)
         )
-
         return object_list
 
 
